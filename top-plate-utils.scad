@@ -23,11 +23,11 @@ module hole_cutouts(keys, space=keyu, holesize=keyh, encoder=8.4){
 		{
 		  if(k[0]==2)
 		    {
-		      translate([xsize/2,ysize/2,0]) cube([holesize,holesize,25], center=true);
+		      translate([xsize/2,ysize/2,0]) rotate([0,0,rotation]) cube([holesize,holesize,25], center=true);
 		    }
-		      translate([xsize/2,ysize/2,0]) cube([holesize,holesize,25], center=true);
+		      translate([xsize/2,ysize/2,0]) rotate([0,0,rotation]) cube([holesize,holesize,25], center=true);
 		}
-	      else translate([xsize/2,ysize/2,0]) cylinder(h=25, d=encoder, center=true);
+	      else translate([xsize/2,ysize/2,0]) rotate([0,0,rotation]) cylinder(h=25, d=encoder, center=true);
 	    }
 	 }
      }
@@ -49,8 +49,8 @@ module keycap_cutouts(keys, delta=0.02, space=keyu, encoder=12){
 	   )
 	 {
 	    translate([xpos,-ypos,0]){
-	      if(!isencoder) translate([xsize/2,ysize/2,0]) cube([xsize+delta,ysize+delta,25], center=true);
-	      else translate([xsize/2,ysize/2,0]) cylinder(h=25, d=encoder, center=true);
+	      if(!isencoder) translate([xsize/2,ysize/2,0]) rotate([0,0,rotation]) cube([xsize+delta,ysize+delta,25], center=true);
+	      else translate([xsize/2,ysize/2,0]) rotate([0,0,rotation]) cylinder(h=25, d=encoder, center=true);
 	    }
 	 }
      }
@@ -73,11 +73,11 @@ module gasket_holes(keys, key_depth, delta=0.02,space=keyu, pcb_holesize=keyg, k
 	 {
 	    translate([xpos,-ypos,0]){
 	      if(!isencoder){
-		translate([xsize/2,ysize/2,-4]) cube([pcb_holesize+delta, pcb_holesize+delta,5], center=true);
-		translate([xsize/2,ysize/2,0]) cube([key_holesize+delta, key_holesize+delta, 10], center=true); 
+		translate([xsize/2,ysize/2,-4]) rotate([0,0,rotation]) cube([pcb_holesize+delta, pcb_holesize+delta,5], center=true);
+		translate([xsize/2,ysize/2,0]) rotate([0,0,rotation]) cube([key_holesize+delta, key_holesize+delta, 10], center=true); 
 	      }      
 	      else 
-		translate([xsize/2,ysize/2,0]) cube([encoder+delta,encoder+delta,8], center=true);
+		translate([xsize/2,ysize/2,0]) rotate([0,0,rotation]) cube([encoder+delta,encoder+delta,8], center=true);
 	    }
 	 }
      }
