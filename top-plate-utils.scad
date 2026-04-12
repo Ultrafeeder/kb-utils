@@ -1,7 +1,7 @@
 include <./constants.scad>;
 // keys are vectors and rows are the first vector layer, and columns are vectors nested in rows
 
-module hole_cutouts(keys, space=19.5, holesize=14, encoder=8.4){
+module hole_cutouts(keys, space=keyu, holesize=keyh, encoder=8.4){
   module stab_hole(){
     
 }
@@ -34,7 +34,7 @@ module hole_cutouts(keys, space=19.5, holesize=14, encoder=8.4){
  } 
 }
 
-module keycap_cutouts(keys=layout, delta=0.02, space=19.5, encoder=12){
+module keycap_cutouts(keys, delta=0.02, space=keyu, encoder=12){
   for(row=[0:len(keys)-1]) {
    for(col=[0:len(keys[row])-1])
      {
@@ -57,7 +57,7 @@ module keycap_cutouts(keys=layout, delta=0.02, space=19.5, encoder=12){
  }  
 }
 
-module gasket_holes(keys=layout, delta=0.02,space=19.5, holesize=18, encoder=12){
+module gasket_holes(keys, key_depth, delta=0.02,space=keyu, pcb_holesize=keyg, key_holesize=keyh,  encoder=12){
    for(row=[0:len(keys)-1]) {
    for(col=[0:len(keys[row])-1])
      {
@@ -72,35 +72,14 @@ module gasket_holes(keys=layout, delta=0.02,space=19.5, holesize=18, encoder=12)
 	   )
 	 {
 	    translate([xpos,-ypos,0]){
-	      if(!isencoder) translate([xsize/2,ysize/2,0]) cube([holesize+delta, holesize+delta,8], center=true);
-	      else translate([xsize/2,ysize/2,0]) cube([encoder+delta,encoder+delta,8], center=true);
+	      if(!isencoder){
+		translate([xsize/2,ysize/2,-4]) cube([pcb_holesize+delta, pcb_holesize+delta,5], center=true);
+		translate([xsize/2,ysize/2,0]) cube([key_holesize+delta, key_holesize+delta, 10], center=true); 
+	      }      
+	      else 
+		translate([xsize/2,ysize/2,0]) cube([encoder+delta,encoder+delta,8], center=true);
 	    }
 	 }
      }
  }
 }
-
-module heat_insert_columns(delta=0.1, width, hi_width, height)
-{
-  $fn=20;
-  difference() 
-    {
-      cylinder(h=height, d=width, center=true);
-      cylinder(h=height+delta, d=hi_width, center=true);
-    }
-}
-
-cols=
-  [
-   [m2_colw, m2_hi_pilot, 10],
-   [m3_colw, m3_hi_pilot, 20],
-   [m4_colw, m4_hi_pilot, 30]
-  ];
-
-for(c=cols)
-{
-  translate([c[2],0,0]) heat_insert_columns(width=c[0], hi_width=c[1], height=8);
-}
-
-
-
