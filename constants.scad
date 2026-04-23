@@ -4,7 +4,7 @@ keyh=14;//hole size
 keyg=18;// gasket hole size if using single switch pcbs
 
 //screws/heatinserts
-m2=2;
+m2=2.5;
 m2_hi_pilot=3.15;
 m2_colw=5.5;
 m2_cd=4.4;

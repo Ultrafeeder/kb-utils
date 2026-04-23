@@ -82,8 +82,26 @@ module gasket_holes(keys, key_depth, delta=0.02,space=keyu, pcb_holesize=keyg, k
 	 {
 	    translate([xpos,-ypos,0]){
 	      if(!isencoder){
+		if(k[0]>=2)
+		  {
+		    translate([xsize/2,ysize/2,-4]) rotate([0,0,rotation]) cube([pcb_holesize+delta, pcb_holesize+delta,5], center=true);
+		    translate([xsize/2,ysize/2,0])
+		      {
+			rotate([0,0,rotation]) cube([key_holesize+delta, key_holesize+delta, 10], center=true); 
+			rotate([0,0,rotation]) translate([-key_holesize/2,-key_holesize/2,0]) stab(2);
+		      }
+		    }
+		if(k[1]>=2)
+		  {
+		    translate([xsize/2,ysize/2,-4]) rotate([0,0,rotation]) cube([pcb_holesize+delta, pcb_holesize+delta,5], center=true);
+		    translate([xsize/2,ysize/2,0])
+		      {
+			rotate([0,0,rotation]) cube([key_holesize+delta, key_holesize+delta, 10], center=true); 
+			rotate([0,0,rotation+270]) translate([-key_holesize/2,-key_holesize/2,0]) stab(2);
+		      }
+		  }
 		translate([xsize/2,ysize/2,-4]) rotate([0,0,rotation]) cube([pcb_holesize+delta, pcb_holesize+delta,5], center=true);
-		translate([xsize/2,ysize/2,0]) rotate([0,0,rotation]) cube([key_holesize+delta, key_holesize+delta, 10], center=true); 
+		translate([xsize/2,ysize/2,0]) rotate([0,0,rotation]) cube([key_holesize+delta, key_holesize+delta, 10], center=true);
 	      }      
 	      else 
 		translate([xsize/2,ysize/2,0]) rotate([0,0,rotation]) cube([encoder+delta,encoder+delta,8], center=true);

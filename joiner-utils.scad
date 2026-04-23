@@ -16,6 +16,7 @@ module bolt_shape_cutout(c_diameter, bolt_diameter, f_height, length)
   union() 
     {
       translate([0,0,length-.02]) cylinder(h=f_height, d1=bolt_diameter, d2=c_diameter, center = false);
+        translate([0,0,(length+f_height)]) cylinder(h=f_height+1, d=c_diameter, center = false);
       cylinder(h=length, d=bolt_diameter, center = false);
     }
 }
@@ -27,10 +28,10 @@ bolt_cutouts=
  [m4_cd, m4, m4_head_h, 12, [30,10,0]],
 ];
 
-// for(b=bolt_cutouts)
+ //for(b=bolt_cutouts)
 // {
-//   translate(b[4]) bolt_shape_cutout(c_diameter=b[0], bolt_diameter=b[1], f_height=b[2], length=b[3]);
-// }
+  // translate(b[4]) //bolt_shape_cutout(c_diameter=b[0], //bolt_diameter=b[1], f_height=b[2], //length=b[3]);
+ //}
 
 
 hi_cols=
